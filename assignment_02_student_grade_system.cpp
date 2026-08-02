@@ -1,75 +1,70 @@
-
-// =============================================================================
-// PROGRAMMING FUNDAMENTALS — Assignment 3
-// =============================================================================
-
 #include <iostream>
 using namespace std;
 
-// Function prototypes
-double calculateSum(const double arr[], int size);
-double calculateAverage(double sum, int size);
-double findMaximum(const double arr[], int size);
-double findMinimum(const double arr[], int size);
 
+int computeSum(int arr[], int n);
+double computeAverage(int arr[], int n);
+int computeMax(int arr[], int n);
+int computeMin(int arr[], int n);
 int main() {
     int n;
 
     cout << "How many numbers? ";
     cin >> n;
 
-    // Requirement: N must be a positive integer
+    // Validate N
     if (n <= 0) {
-        cout << "Error: Number of elements must be greater than zero." << endl;
+        cout << "Error: The number of values must be a positive integer." << endl;
         return 1;
     }
 
-    // Allocate array dynamically to fit user size N
-    double* numbers = new double[n];
+    
+    int* numbers = new int[n];
 
-    // Read elements from user
-    for (int i = 0; i < n; ++i) {
+    
+    for (int i = 0; i < n; i++) {
         cout << "Enter number " << (i + 1) << ": ";
         cin >> numbers[i];
     }
 
-    // Perform statistical calculations using functions
-    double sum = calculateSum(numbers, n);
-    double avg = calculateAverage(sum, n);
-    double maxVal = findMaximum(numbers, n);
-    double minVal = findMinimum(numbers, n);
+    
+    int sum = computeSum(numbers, n);
+    double average = computeAverage(numbers, n);
+    int maximum = computeMax(numbers, n);
+    int minimum = computeMin(numbers, n);
 
-    // Display results
+    
     cout << "\nResults:" << endl;
     cout << "Sum:     " << sum << endl;
-    cout << "Average: " << avg << endl;
-    cout << "Maximum: " << maxVal << endl;
-    cout << "Minimum: " << minVal << endl;
+    cout << "Average: " << average << endl;
+    cout << "Maximum: " << maximum << endl;
+    cout << "Minimum: " << minimum << endl;
 
-    // Free dynamically allocated memory
+    
     delete[] numbers;
 
     return 0;
 }
 
-// Function to compute the sum of array elements
-double calculateSum(const double arr[], int size) {
-    double total = 0.0;
-    for (int i = 0; i < size; ++i) {
-        total += arr[i];
+
+int computeSum(int arr[], int n) {
+    int sum = 0;
+    for (int i = 0; i < n; i++) {
+        sum += arr[i];
     }
-    return total;
+    return sum;
 }
 
-// Function to compute the average from the total sum
-double calculateAverage(double sum, int size) {
-    return sum / size;
+
+double computeAverage(int arr[], int n) {
+    int sum = computeSum(arr, n);
+    return static_cast<double>(sum) / n;
 }
 
-// Function to find the maximum element manually
-double findMaximum(const double arr[], int size) {
-    double maxVal = arr[0];
-    for (int i = 1; i < size; ++i) {
+
+int computeMax(int arr[], int n) {
+    int maxVal = arr[0];
+    for (int i = 1; i < n; i++) {
         if (arr[i] > maxVal) {
             maxVal = arr[i];
         }
@@ -77,10 +72,9 @@ double findMaximum(const double arr[], int size) {
     return maxVal;
 }
 
-// Function to find the minimum element manually
-double findMinimum(const double arr[], int size) {
-    double minVal = arr[0];
-    for (int i = 1; i < size; ++i) {
+int computeMin(int arr[], int n) {
+    int minVal = arr[0];
+    for (int i = 1; i < n; i++) {
         if (arr[i] < minVal) {
             minVal = arr[i];
         }
